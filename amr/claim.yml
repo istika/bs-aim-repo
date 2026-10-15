@@ -2,4 +2,25 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: amr
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: amr
+  namespace: amr
+spec:
+  description: amr Project
+
+  sourceRepos:
+    - 'https://github.com/istika/*'
+
+  destinations:
+    - namespace: amr
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist: []
+
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
 
