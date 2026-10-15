@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: red
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: red
+  namespace: argocd
+spec:
+  description: red Project
+
+  sourceRepos:
+    - 'https://github.com/istika/*'
+
+  destinations:
+    - namespace: red
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist: []
+
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
