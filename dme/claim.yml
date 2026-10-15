@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dme
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dme
+  namespace: argocd
+spec:
+  description: dme Project
+
+  sourceRepos:
+    - 'https://github.com/istika/*'
+
+  destinations:
+    - namespace: dme
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist: []
+
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
